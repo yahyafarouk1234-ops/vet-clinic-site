@@ -4,12 +4,12 @@
    طول ما القيم لسه "YOUR_..." الموقع بيشتغل في وضع تجريبي (البيانات بتتحفظ في المتصفح بس).
    ============================================ */
 window.FIREBASE_CONFIG = {
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyBYDPzhJYJS_jmL7_ge6wokG-vhMGwf4XI",
   authDomain: "vet-clinic-mohamed.firebaseapp.com",
   projectId: "vet-clinic-mohamed",
-  storageBucket: "vet-clinic-mohamed.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  storageBucket: "vet-clinic-mohamed.firebasestorage.app",
+  messagingSenderId: "192471504006",
+  appId: "1:192471504006:web:62ea08917b23c91e76ed07"
 };
 
 /* بيانات العيادة — مكان واحد للتعديل */
