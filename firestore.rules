@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // المواعيد المحجوزة (تاريخ + وقت بس) — أي زائر يقرأ ويحجز، ومحدش يعدّل غير الدكتور.
+    // create بس للزوار: لو الميعاد موجود، العملية بتتحول update وبتترفض (يمنع الحجز المزدوج).
+    match /slots/{slotId} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasOnly(['date', 'time'])
+                    && request.resource.data.date is string
+                    && request.resource.data.time is string;
+      allow update, delete: if request.auth != null;
+    }
+
+    // الحجوزات — الزائر يضيف بس، والدكتور (مسجل دخول) يقرأ ويعدّل ويمسح.
+    match /bookings/{id} {
+      allow create: if request.resource.data.status == 'new'
+                    && request.resource.data.ownerName is string && request.resource.data.ownerName.size() <= 80
+                    && request.resource.data.phone is string && request.resource.data.phone.size() <= 15
+                    && request.resource.data.petName is string && request.resource.data.petName.size() <= 80
+                    && request.resource.data.problem is string && request.resource.data.problem.size() <= 1000
+                    && request.resource.data.photo.size() <= 250000;
+      allow read, update, delete: if request.auth != null;
+    }
+
+    // ملفات الحيوانات — للدكتور بس.
+    match /pets/{id} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}

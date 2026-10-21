@@ -1,0 +1,18 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "hosting": {
+    "public": ".",
+    "cleanUrls": true,
+    "ignore": [
+      "firebase.json",
+      "firestore.rules",
+      "vercel.json",
+      "package.json",
+      "README.md",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

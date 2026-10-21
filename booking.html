@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>احجز موعد | عيادة الحياة البيطرية</title>
+<meta name="description" content="احجز كشف لحيوانك الأليف أونلاين واختار الميعاد المناسب، أو تواصل مع العيادة على واتساب.">
+<meta name="theme-color" content="#3F5A3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/booking.css">
+</head>
+<body data-page="booking">
+
+<header id="site-header"></header>
+
+<main>
+  <section class="page-banner">
+    <div class="container">
+      <span class="eyebrow">احجز موعدك</span>
+      <h1>احجز كشف لحيوانك الأليف</h1>
+      <p>املأ البيانات واختار الميعاد، وهيتواصل معاك فريق العيادة للتأكيد.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="row gy-5 gx-lg-5">
+        <!-- Form -->
+        <div class="col-lg-7">
+          <form id="bookingForm" class="booking-form" novalidate>
+            <div id="demoNote" class="demo-note" hidden>وضع تجريبي: الحجوزات بتتحفظ في المتصفح ده بس لحد ما تفعّل Firebase.</div>
+            <div id="formAlert" class="form-alert" role="alert" hidden></div>
+
+            <div class="row">
+              <div class="col-sm-6"><div class="form-row">
+                <label for="ownerName">اسم صاحب الحيوان</label>
+                <input type="text" id="ownerName" name="ownerName" autocomplete="name" placeholder="مثال: أحمد محمد">
+                <span class="field-error"></span>
+              </div></div>
+              <div class="col-sm-6"><div class="form-row">
+                <label for="phone">رقم الموبايل</label>
+                <input type="tel" id="phone" name="phone" inputmode="numeric" autocomplete="tel" maxlength="11" placeholder="01xxxxxxxxx" dir="ltr" style="text-align:right">
+                <span class="field-error"></span>
+              </div></div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6"><div class="form-row">
+                <label for="petName">اسم الحيوان</label>
+                <input type="text" id="petName" name="petName" placeholder="مثال: لوسي">
+                <span class="field-error"></span>
+              </div></div>
+              <div class="col-sm-3 col-6"><div class="form-row">
+                <label for="petType">النوع</label>
+                <select id="petType" name="petType">
+                  <option value="">اختر</option>
+                  <option value="قط">قط 🐱</option>
+                  <option value="كلب">كلب 🐶</option>
+                  <option value="طائر">طائر 🐦</option>
+                  <option value="أرنب">أرنب 🐰</option>
+                  <option value="أخرى">أخرى</option>
+                </select>
+                <span class="field-error"></span>
+              </div></div>
+              <div class="col-sm-3 col-6"><div class="form-row">
+                <label for="petAge">العمر</label>
+                <input type="text" id="petAge" name="petAge" placeholder="سنتين / 6 شهور">
+                <span class="field-error"></span>
+              </div></div>
+            </div>
+
+            <div class="form-row">
+              <label for="problem">المشكلة أو سبب الزيارة</label>
+              <textarea id="problem" name="problem" rows="3" placeholder="اكتب وصف مختصر للحالة..."></textarea>
+              <span class="field-error"></span>
+            </div>
+
+            <div class="form-row">
+              <label for="date">التاريخ</label>
+              <input type="date" id="date" name="date">
+              <span class="field-error"></span>
+            </div>
+
+            <div class="form-row" id="slotsRow">
+              <span class="form-label-v" id="slotsLabel">الميعاد</span>
+              <input type="hidden" id="time" name="time">
+              <div id="slots" class="slots" role="group" aria-labelledby="slotsLabel"></div>
+              <span id="slotsHint" class="slots-hint"></span>
+              <span class="field-error"></span>
+            </div>
+
+            <div class="form-row">
+              <label for="photo">صورة للحيوان قبل الكشف (اختياري)</label>
+              <input type="file" id="photo" name="photo" accept="image/*">
+              <div id="photoPreview" class="photo-preview"></div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="vbtn vbtn-accent vbtn-lg vbtn-block">تأكيد الحجز</button>
+          </form>
+
+          <div id="confirmation" class="confirmation" hidden>
+            <div class="confirmation-icon">✓</div>
+            <h2>تم استلام حجزك</h2>
+            <div class="summary-box">
+              <div>🐾 <strong id="sumName"></strong></div>
+              <div>📅 <strong id="sumWhen"></strong></div>
+            </div>
+            <p>هيتم التواصل معاك لتأكيد الموعد. تقدر كمان تبعتلنا على واتساب.</p>
+            <a id="waConfirm" href="#" target="_blank" rel="noopener" class="vbtn vbtn-outline vbtn-lg">💬 تأكيد على واتساب</a>
+            <a href="index.html" class="vbtn vbtn-primary vbtn-lg">الرجوع للرئيسية</a>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="col-lg-5">
+          <span class="eyebrow">تواصل معنا</span>
+          <h2>أو كلّمنا مباشرة</h2>
+          <div class="contact-item"><span class="contact-icon">📍</span><span>طنطا، الغربية</span></div>
+          <div class="contact-item"><span class="contact-icon">💬</span><a href="https://wa.me/201286740702" target="_blank" rel="noopener" dir="ltr">01286740702</a></div>
+          <div class="contact-item"><span class="contact-icon">🕒</span><span>يوميًا من 10 صباحًا حتى 10 مساءً</span></div>
+          <div class="contact-map mt-3">
+            <iframe src="https://www.google.com/maps?q=Tanta,Gharbia,Egypt&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="خريطة العيادة"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="site-footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/store.js"></script>
+<script src="js/components.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/booking.js"></script>
+</body>
+</html>
