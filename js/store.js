@@ -11,7 +11,7 @@
   if (configured) {
     firebase.initializeApp(cfg);
     db = firebase.firestore();
-    auth = firebase.auth();
+    auth = (typeof firebase.auth === 'function') ? firebase.auth() : null;  // مكتبة Auth بتتحمّل في صفحة اللوحة بس
   }
 
   /* ---------- localStorage helpers (demo mode) ---------- */
