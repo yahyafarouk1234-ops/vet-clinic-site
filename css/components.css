@@ -1,0 +1,126 @@
+/* ============================================
+   components.css — cards, services, reviews, FAQ, steps
+   ============================================ */
+
+/* ---------- Record card (signature motif) ---------- */
+.record-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 290px;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+.record-card-back {
+  position: absolute; top: 30px; inset-inline-end: calc(50% - 160px);
+  height: 88%; z-index: 1; opacity: .5; transform: rotate(6deg);
+}
+.record-card-tab { background: var(--primary); color: #fff; font-weight: 700; padding: 10px 18px; font-size: .95rem; }
+.record-card-body { padding: 20px; }
+.record-avatar {
+  width: 56px; height: 56px; background: var(--bg-alt); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 14px;
+}
+.record-row { display: flex; justify-content: space-between; gap: 10px; font-size: .9rem; padding: 7px 0; border-bottom: 1px dashed var(--line); }
+.record-row span { color: var(--muted); }
+.record-status {
+  margin-top: 12px; background: rgba(63, 90, 62, .12); color: var(--primary-dark);
+  font-weight: 700; font-size: .85rem; padding: 8px 12px; border-radius: 10px; text-align: center;
+}
+
+/* ---------- Generic card ---------- */
+.v-card {
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 26px 22px; height: 100%;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.v-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.v-card-highlight { background: var(--primary); border-color: var(--primary-dark); }
+.v-card-highlight h3 { color: #fff; }
+.v-card-highlight p, .v-card-highlight .service-en { color: rgba(255, 255, 255, .8); }
+.v-card-highlight .service-icon { background: rgba(255, 255, 255, .16); }
+
+.service-icon {
+  font-size: 1.8rem; width: 52px; height: 52px; background: var(--bg-alt);
+  border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+}
+.service-en { display: block; font-size: .8rem; color: var(--muted); letter-spacing: .3px; }
+.free-badge {
+  display: inline-block; background: var(--accent); color: var(--primary-dark);
+  font-family: 'Tajawal', sans-serif; font-size: .75rem; font-weight: 800;
+  padding: 3px 12px; border-radius: 999px; animation: pulse-badge 1.8s ease-in-out infinite;
+}
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(232, 163, 61, .55); }
+  50% { transform: scale(1.07); box-shadow: 0 0 0 6px rgba(232, 163, 61, 0); }
+}
+@media (prefers-reduced-motion: reduce) { .free-badge { animation: none; } }
+
+/* ---------- Filter chips (services page) ---------- */
+.chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+.chip {
+  border: 1px solid var(--line); background: var(--card); color: var(--muted);
+  padding: 8px 20px; border-radius: 999px; font-weight: 700; font-family: 'Tajawal', sans-serif; cursor: pointer;
+  transition: all .15s ease;
+}
+.chip:hover { border-color: var(--primary); color: var(--primary); }
+.chip.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+.service-item.is-hidden { display: none; }
+
+/* ---------- Steps ---------- */
+.step { text-align: center; padding: 10px 14px; }
+.step-num {
+  width: 54px; height: 54px; margin: 0 auto 14px; border-radius: 50%;
+  background: var(--accent); color: var(--primary-dark);
+  font-family: 'Lalezar'; font-size: 1.5rem; display: flex; align-items: center; justify-content: center;
+}
+
+/* ---------- Doctor ---------- */
+.doctor-photo { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center 35%; border-radius: var(--radius); box-shadow: var(--shadow); display: block; }
+.img-placeholder {
+  width: 100%; aspect-ratio: 4/3; border-radius: var(--radius);
+  background: repeating-linear-gradient(135deg, var(--card), var(--card) 10px, var(--bg) 10px, var(--bg) 20px);
+  border: 2px dashed var(--line); display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; color: var(--muted);
+}
+.role { font-weight: 700; color: var(--primary); margin-bottom: 14px; }
+.about-points { padding-inline-start: 20px; }
+.about-points li { margin-bottom: 8px; color: var(--muted); }
+.section-dark .about-points li { color: rgba(255, 255, 255, .85); }
+
+/* ---------- Gallery & reviews ---------- */
+.pet-gallery { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 36px; }
+.pet-gallery img, .pet-gallery .img-placeholder {
+  width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 14px;
+  box-shadow: var(--shadow); border: 3px solid var(--card); font-size: 2rem;
+}
+.review-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px 24px; height: 100%; }
+.stars { color: var(--accent-dark); letter-spacing: 3px; margin-bottom: 10px; }
+.review-card strong { color: var(--primary-dark); font-size: .9rem; }
+.carousel-indicators [data-bs-target] { background-color: var(--primary); }
+.carousel-control-prev, .carousel-control-next { filter: invert(.6); }
+
+/* ---------- FAQ (bootstrap accordion skin) ---------- */
+.accordion { --bs-accordion-bg: var(--card); --bs-accordion-border-color: var(--line); --bs-accordion-btn-focus-box-shadow: 0 0 0 3px rgba(232,163,61,.5); --bs-accordion-active-bg: var(--bg-alt); --bs-accordion-active-color: var(--primary-dark); }
+.accordion-button { font-weight: 700; font-family: 'Tajawal', sans-serif; }
+.accordion-body { color: var(--muted); }
+
+/* ---------- Contact ---------- */
+.contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-weight: 500; }
+.contact-icon { font-size: 1.2rem; }
+.contact-map { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); height: 320px; }
+.contact-map iframe { width: 100%; height: 100%; border: 0; }
+
+/* ---------- CTA band ---------- */
+.cta-band { text-align: center; }
+.cta-band .hero-actions { justify-content: center; }
+
+@media (max-width: 767.98px) {
+  .pet-gallery { grid-template-columns: repeat(3, 1fr); }
+  .record-card-back { display: none; }
+}
+
+.pet-gallery-2 { grid-template-columns: repeat(2, 1fr); max-width: 640px; margin-inline: auto; }
